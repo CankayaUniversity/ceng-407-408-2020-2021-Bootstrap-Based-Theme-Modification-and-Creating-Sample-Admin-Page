@@ -1,2 +1,2 @@
-# ceng-407-408-2020-2021-Creating-a-website-with-Bootstrap
-Creating a website with Bootstrap
+# ceng-407-408-2020-2021-Bootstrap-Based-Theme-Modification-and-Creating-Sample-Admin-Page
+Bootstrap-Based Theme Modification and Creating Sample Admin Page
