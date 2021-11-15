@@ -72,10 +72,10 @@
           <h2 class="brand-text text-primary ms-1">Vuexy</h2>
         </a>
 
-        <h4 class="card-title mb-1">Welcome to Vuexy! 👋</h4>
+        <h4 class="card-title mb-1">Welcome to {{ config('app.name') }}! 👋</h4>
         <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
 
-        <form class="auth-login-form mt-2" action="/" method="GET">
+        <form class="auth-login-form mt-2" action="/" method="POST">
           <div class="mb-1">
             <label for="login-email" class="form-label">Email</label>
             <input
@@ -83,7 +83,7 @@
               class="form-control"
               id="login-email"
               name="login-email"
-              placeholder="john@example.com"
+              placeholder="user@example.com"
               aria-describedby="login-email"
               tabindex="1"
               autofocus
@@ -126,24 +126,6 @@
           </a>
         </p>
 
-        <div class="divider my-2">
-          <div class="divider-text">or</div>
-        </div>
-
-        <div class="auth-footer-btn d-flex justify-content-center">
-          <a href="#" class="btn btn-facebook">
-            <i data-feather="facebook"></i>
-          </a>
-          <a href="#" class="btn btn-twitter white">
-            <i data-feather="twitter"></i>
-          </a>
-          <a href="#" class="btn btn-google">
-            <i data-feather="mail"></i>
-          </a>
-          <a href="#" class="btn btn-github">
-            <i data-feather="github"></i>
-          </a>
-        </div>
       </div>
     </div>
     <!-- /Login basic -->
