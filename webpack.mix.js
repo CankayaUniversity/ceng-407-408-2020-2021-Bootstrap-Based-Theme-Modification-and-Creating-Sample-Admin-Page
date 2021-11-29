@@ -1,4 +1,6 @@
 const mix = require('laravel-mix')
+const exec = require('child_process').exec
+require('dotenv').config()
 
 /*
  |--------------------------------------------------------------------------
@@ -6,60 +8,95 @@ const mix = require('laravel-mix')
  |--------------------------------------------------------------------------
  |
  | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel applications. By default, we are compiling the CSS
+ | for your Laravel application. By default, we are compiling the Sass
  | file for the application as well as bundling up all the JS files.
  |
  */
 
-mix
-  .js('resources/js/app.js', 'public/js')
-  .webpackConfig({
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, 'resources/js/src/'),
-        '@themeConfig': path.resolve(__dirname, 'resources/js/themeConfig.js'),
-        '@core': path.resolve(__dirname, 'resources/js/src/@core'),
-        '@validations': path.resolve(__dirname, 'resources/js/src/@core/utils/validations/validations.js'),
-        '@axios': path.resolve(__dirname, 'resources/js/src/libs/axios')
-      }
-    },
-    module: {
-      rules: [
-        {
-          test: /\.s[ac]ss$/i,
-          use: [
-            {
-              loader: 'sass-loader',
-              options: {
-                sassOptions: {
-                  includePaths: ['node_modules', 'resources/js/src/assets']
-                }
-              }
-            }
-          ]
-        },
-        {
-          test: /(\.(png|jpe?g|gif|webp)$|^((?!font).)*\.svg$)/,
-          loaders: {
-            loader: 'file-loader',
-            options: {
-              name: 'images/[path][name].[ext]',
-              context: '../vuexy-vuejs-bootstrap-vue-template/src/assets/images'
-            }
-          }
-        }
-      ]
-    },
-    output: {
-      chunkFilename: 'js/chunks/[name].js'
-    }
-  })
-  .sass('resources/scss/app.scss', 'public/css')
-  .options({
-    postCss: [require('autoprefixer'), require('postcss-rtl')]
-  })
-mix.copy('resources/scss/loader.css', 'public/css')
+const glob = require('glob')
+const path = require('path')
 
-if (mix.inProduction()) {
-  mix.version()
+/*
+ |--------------------------------------------------------------------------
+ | Vendor assets
+ |--------------------------------------------------------------------------
+ */
+
+function mixAssetsDir(query, cb) {
+  ;(glob.sync('resources/' + query) || []).forEach(f => {
+    f = f.replace(/[\\\/]+/g, '/')
+    cb(f, f.replace('resources', 'public'))
+  })
 }
+
+const sassOptions = {
+  precision: 5,
+  includePaths: ['node_modules', 'resources/assets/']
+}
+
+// plugins Core stylesheets
+mixAssetsDir('scss/base/plugins/**/!(_)*.scss', (src, dest) =>
+  mix.sass(src, dest.replace(/(\\|\/)scss(\\|\/)/, '$1css$2').replace(/\.scss$/, '.css'), { sassOptions })
+)
+
+// pages Core stylesheets
+mixAssetsDir('scss/base/pages/**/!(_)*.scss', (src, dest) =>
+  mix.sass(src, dest.replace(/(\\|\/)scss(\\|\/)/, '$1css$2').replace(/\.scss$/, '.css'), { sassOptions })
+)
+
+// Core stylesheets
+mixAssetsDir('scss/base/core/**/!(_)*.scss', (src, dest) =>
+  mix.sass(src, dest.replace(/(\\|\/)scss(\\|\/)/, '$1css$2').replace(/\.scss$/, '.css'), { sassOptions })
+)
+
+// script js
+mixAssetsDir('js/scripts/**/*.js', (src, dest) => mix.scripts(src, dest))
+
+/*
+ |--------------------------------------------------------------------------
+ | Application assets
+ |--------------------------------------------------------------------------
+ */
+
+mixAssetsDir('vendors/js/**/*.js', (src, dest) => mix.scripts(src, dest))
+mixAssetsDir('vendors/css/**/*.css', (src, dest) => mix.copy(src, dest))
+mixAssetsDir('vendors/**/**/images', (src, dest) => mix.copy(src, dest))
+mixAssetsDir('vendors/css/editors/quill/fonts/', (src, dest) => mix.copy(src, dest))
+mixAssetsDir('fonts', (src, dest) => mix.copy(src, dest))
+mixAssetsDir('fonts/**/**/*.css', (src, dest) => mix.copy(src, dest))
+mix.copyDirectory('resources/images', 'public/images')
+mix.copyDirectory('resources/data', 'public/data')
+
+mix
+  .js('resources/js/core/app-menu.js', 'public/js/core')
+  .js('resources/js/core/app.js', 'public/js/core')
+  .js('resources/assets/js/scripts.js', 'public/js/core')
+  .sass('resources/scss/base/themes/dark-layout.scss', 'public/css/base/themes', { sassOptions })
+  .sass('resources/scss/base/themes/bordered-layout.scss', 'public/css/base/themes', { sassOptions })
+  .sass('resources/scss/base/themes/semi-dark-layout.scss', 'public/css/base/themes', { sassOptions })
+  .sass('resources/scss/core.scss', 'public/css', { sassOptions })
+  .sass('resources/scss/overrides.scss', 'public/css', { sassOptions })
+  .sass('resources/scss/base/custom-rtl.scss', 'public/css-rtl', { sassOptions })
+  .sass('resources/assets/scss/style-rtl.scss', 'public/css-rtl', { sassOptions })
+  .sass('resources/assets/scss/style.scss', 'public/css', { sassOptions })
+
+mix.then(() => {
+  if (process.env.MIX_CONTENT_DIRECTION === 'rtl') {
+    let command = `node ${path.resolve('node_modules/rtlcss/bin/rtlcss.js')} -d -e ".css" ./public/css/ ./public/css/`
+    exec(command, function (err, stdout, stderr) {
+      if (err !== null) {
+        console.log(err)
+      }
+    })
+  }
+})
+
+// if (mix.inProduction()) {
+//   mix.version()
+//   mix.webpackConfig({
+//     output: {
+//       publicPath: '/demo/vuexy-bootstrap-laravel-admin-template-new/demo-2/'
+//     }
+//   })
+//   mix.setResourceRoot('/demo/vuexy-bootstrap-laravel-admin-template-new/demo-2/')
+// }
