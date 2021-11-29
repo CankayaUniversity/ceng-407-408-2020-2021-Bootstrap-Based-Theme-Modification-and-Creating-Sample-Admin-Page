@@ -91,11 +91,11 @@
             @if (Auth::check())
               {{ Auth::user()->name }}
             @else
-              John Doe
+              -
             @endif
           </span>
           <span class="user-status">
-            Admin
+            
           </span>
         </div>
         <span class="avatar">
