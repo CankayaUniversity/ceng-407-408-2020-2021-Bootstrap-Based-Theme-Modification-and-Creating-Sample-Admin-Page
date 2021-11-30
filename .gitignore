@@ -19,3 +19,6 @@ yarn-error.log
 /vuexy-shell-scripts
 supervisord.log
 supervisord.pid
+a.sh
+f.sh
+m.sh
