@@ -5,6 +5,7 @@ use App\Http\Controllers\StaterkitController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ServerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,5 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('verify-email', [AuthenticationController::class, 'verify_email_cover'])->name('auth-verify-email');
     Route::get('two-steps', [AuthenticationController::class, 'two_steps_cover'])->name('auth-two-steps');
 });
+
+Route::get('server/{id}', [ServerController::class, 'overview'])->name('server-overview');
