@@ -55,8 +55,8 @@
                             </div>
                         </div>
                         <div class="my-auto">
-                            <h4 class="fw-bolder mb-0">$9745</h4>
-                            <p class="card-text font-small-3 mb-0">Revenue</p>
+                            <h4 class="fw-bolder mb-0">{{ $system_resource->load }}%</h4>
+                            <p class="card-text font-small-3 mb-0">Load</p>
                         </div>
                     </div>
                 </div>

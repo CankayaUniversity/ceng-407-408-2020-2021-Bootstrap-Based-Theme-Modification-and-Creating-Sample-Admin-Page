@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 62,
             'memory'    => 78,
             'disk'      => 88,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -55,6 +56,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 52,
             'memory'    => 18,
             'disk'      => 58,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -62,6 +64,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 42,
             'memory'    => 58,
             'disk'      => 68,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -69,6 +72,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 62,
             'memory'    => 78,
             'disk'      => 88,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -76,6 +80,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 52,
             'memory'    => 18,
             'disk'      => 58,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -83,6 +88,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 42,
             'memory'    => 58,
             'disk'      => 68,
+            'load'      => 15,
         ]);
         
         SystemResource::create([
@@ -90,6 +96,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 62,
             'memory'    => 78,
             'disk'      => 88,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -97,6 +104,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 52,
             'memory'    => 18,
             'disk'      => 58,
+            'load'      => 15,
         ]);
 
         SystemResource::create([
@@ -104,6 +112,7 @@ class DatabaseSeeder extends Seeder
             'cpu'       => 42,
             'memory'    => 58,
             'disk'      => 68,
+            'load'      => 15,
         ]);
     }
 }
