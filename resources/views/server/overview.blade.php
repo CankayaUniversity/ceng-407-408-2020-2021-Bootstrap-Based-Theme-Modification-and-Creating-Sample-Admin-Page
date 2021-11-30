@@ -4,6 +4,6 @@
 
 @section('content')
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus eligendi est, eaque quo alias libero sed totam! Veritatis numquam beatae dolore ea minus, aliquid tenetur in temporibus aliquam, ipsum quas?
+@livewire('server.statistics', ['system_resource' => $system_resource])
 
 @endsection
