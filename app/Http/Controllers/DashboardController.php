@@ -14,11 +14,8 @@ class DashboardController extends Controller
             ['link' => "home", 'name' => "Home"], ['name' => "Servers"]
         ];
 
-        $servers = Server::get();
-
         return view('/content/home', [
-            'breadcrumbs' => $breadcrumbs,
-            'servers'     => $servers,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 }

@@ -73,5 +73,6 @@ data-asset-path="{{ asset('/')}}">
       }
     })
   </script>
+  @livewireScripts
 </body>
 </html>

@@ -25,6 +25,7 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
 
   {{-- Include core + vendor Styles --}}
   @include('panels/styles')
+  @livewireStyles
 </head>
 
 @isset($configData["mainLayoutType"])
