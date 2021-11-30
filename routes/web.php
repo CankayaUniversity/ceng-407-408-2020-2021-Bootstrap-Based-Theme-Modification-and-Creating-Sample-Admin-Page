@@ -6,6 +6,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServerController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,5 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::get('server/{id}', [ServerController::class, 'overview'])->name('server-overview');
+
+Route::get('user/list', [UserController::class, 'list'])->name('user-list');
