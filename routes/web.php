@@ -45,3 +45,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('verify-email', [AuthenticationController::class, 'verify_email_cover'])->name('auth-verify-email');
     Route::get('two-steps', [AuthenticationController::class, 'two_steps_cover'])->name('auth-two-steps');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

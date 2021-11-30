@@ -60,10 +60,11 @@ $configData = Helper::applClasses();
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
         <h2 class="card-title fw-bold mb-1">Welcome to {{ config('app.name') }}! 👋</h2>
         <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
-        <form class="auth-login-form mt-2" action="/" method="GET">
+        <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
+          @csrf
           <div class="mb-1">
             <label class="form-label" for="login-email">Email</label>
-            <input class="form-control" id="login-email" type="text" name="login-email" placeholder="" aria-describedby="login-email" autofocus="" tabindex="1" />
+            <input class="form-control" id="login-email" type="text" name="email" placeholder="" aria-describedby="login-email" autofocus="" tabindex="1" />
           </div>
           <div class="mb-1">
             <div class="d-flex justify-content-between">
@@ -73,7 +74,7 @@ $configData = Helper::applClasses();
               </a>
             </div>
             <div class="input-group input-group-merge form-password-toggle">
-              <input class="form-control form-control-merge" id="login-password" type="password" name="login-password" placeholder="" aria-describedby="login-password" tabindex="2" />
+              <input class="form-control form-control-merge" id="login-password" type="password" name="password" placeholder="" aria-describedby="login-password" tabindex="2" />
               <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
             </div>
           </div>
