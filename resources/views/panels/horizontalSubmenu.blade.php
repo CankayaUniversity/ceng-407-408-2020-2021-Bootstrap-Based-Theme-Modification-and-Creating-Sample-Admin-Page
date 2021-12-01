@@ -15,7 +15,7 @@
       @if (isset($submenu->icon))
       <i data-feather="{{ $submenu->icon }}"></i>
       @endif
-      <span>{{ __('locale.'.$submenu->name) }}</span>
+      <span>{{ ubmenu->name }}</span>
     </a>
     @if (isset($submenu->submenu))
     @include('panels/horizontalSubmenu', ['menu' => $submenu->submenu])
