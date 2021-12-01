@@ -69,7 +69,7 @@ $configData = Helper::applClasses();
           <div class="mb-1">
             <div class="d-flex justify-content-between">
               <label class="form-label" for="login-password">Password</label>
-              <a href="{{url("auth/forgot-password-cover")}}">
+              <a href="{{url("auth/forgot-password")}}">
                 <small>Forgot Password?</small>
               </a>
             </div>
@@ -88,7 +88,7 @@ $configData = Helper::applClasses();
         </form>
         <p class="text-center mt-2">
           <span>New on our platform?</span>
-          <a href="{{url('auth/register-cover')}}"><span>&nbsp;Create an account</span></a>
+          <a href="{{url('auth/register')}}"><span>&nbsp;Create an account</span></a>
         </p>
         
       </div>

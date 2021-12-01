@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServerController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,14 +38,14 @@ Route::get('layouts/blank', [StaterkitController::class, 'layout_blank'])->name(
 // locale Route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
-Route::group(['prefix' => 'auth'], function () {
-    Route::get('login', [AuthenticationController::class, 'login_cover'])->name('login');
-    Route::get('register', [AuthenticationController::class, 'register_cover'])->name('auth-register');
-    Route::get('forgot-password', [AuthenticationController::class, 'forgot_password_cover'])->name('auth-forgot-password');
-    Route::get('reset-password', [AuthenticationController::class, 'reset_password_cover'])->name('auth-reset-password');
-    Route::get('verify-email', [AuthenticationController::class, 'verify_email_cover'])->name('auth-verify-email');
-    Route::get('two-steps', [AuthenticationController::class, 'two_steps_cover'])->name('auth-two-steps');
-});
+// Route::group(['prefix' => 'auth'], function () {
+//     Route::get('login', [AuthenticationController::class, 'login_cover'])->name('auth-login');
+//     Route::get('register', [AuthenticationController::class, 'register_cover'])->name('auth-register');
+//     Route::get('forgot-password', [AuthenticationController::class, 'forgot_password_cover'])->name('auth-forgot-password');
+//     Route::get('reset-password', [AuthenticationController::class, 'reset_password_cover'])->name('auth-reset-password');
+//     Route::get('verify-email', [AuthenticationController::class, 'verify_email_cover'])->name('auth-verify-email');
+//     Route::get('two-steps', [AuthenticationController::class, 'two_steps_cover'])->name('auth-two-steps');
+// });
 
 Auth::routes();
 

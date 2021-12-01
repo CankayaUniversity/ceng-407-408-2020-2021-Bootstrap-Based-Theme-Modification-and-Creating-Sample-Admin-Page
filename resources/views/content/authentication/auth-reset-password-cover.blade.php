@@ -60,7 +60,7 @@ $configData = Helper::applClasses();
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
         <h2 class="card-title fw-bold mb-1">Reset Password 🔒</h2>
         <p class="card-text mb-2">Your new password must be different from previously used passwords</p>
-        <form class="auth-reset-password-form mt-2" action="/auth/login-cover" method="GET">
+        <form class="auth-reset-password-form mt-2" action="/auth/login" method="GET">
           <div class="mb-1">
             <div class="d-flex justify-content-between">
               <label class="form-label" for="reset-password-new">New Password</label>
@@ -82,7 +82,7 @@ $configData = Helper::applClasses();
           <button class="btn btn-primary w-100" tabindex="3">Set New Password</button>
         </form>
         <p class="text-center mt-2">
-          <a href="{{url('auth/login-cover')}}">
+          <a href="{{url('auth/login')}}">
             <i data-feather="chevron-left"></i> Back to login
           </a>
         </p>
