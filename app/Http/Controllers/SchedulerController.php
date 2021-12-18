@@ -20,6 +20,7 @@ class SchedulerController extends Controller
             if(!$data) abort(403);
     
             $data = json_decode($data, true);
+            return $data;
 
             $sysres = new SystemResource();
             $sysres->server_id = $server->id;
