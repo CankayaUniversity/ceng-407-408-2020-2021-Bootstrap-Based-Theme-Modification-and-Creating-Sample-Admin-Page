@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="my-auto">
-                            <h4 class="fw-bolder mb-0">{{ $system_resource->memory }}%</h4>
+                            <h4 class="fw-bolder mb-0">{{ $system_resource->vmem }}%</h4>
                             <p class="card-text font-small-3 mb-0">Memory</p>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="my-auto">
-                            <h4 class="fw-bolder mb-0">{{ $system_resource->load }}%</h4>
+                            <h4 class="fw-bolder mb-0">{{ $system_resource->load_avg * 100 }}%</h4>
                             <p class="card-text font-small-3 mb-0">Load</p>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class SystemResource extends Model
 {
@@ -43,6 +44,27 @@ class SystemResource extends Model
 
     public function server(){
         return $this->belongsTo(Server::class, 'server_id', 'id');
+    }
+
+    public function chart_data ($limit = 60) {
+        $cache_key = 'sysres.chart-data.' . $this->server->id . $limit;
+        return Cache::remember($cache_key, now()->addMinutes(1), function() use (&$limit){
+            return SystemResource::where('server_id', $this->server->id)->limit($limit)->get();
+        });
+    }
+
+    public static function parse_chart_data (&$chart_data, $alias) {
+        $chart = [
+            'data'   => [],
+            'labels' => [],
+        ];
+
+        foreach ($chart_data as &$v) {
+            $chart['data'][]   = $v->{$alias};
+            $chart['labels'][] = $v->created_at->format('d-m-Y H:i');
+        }
+
+        return $chart;
     }
 
 }

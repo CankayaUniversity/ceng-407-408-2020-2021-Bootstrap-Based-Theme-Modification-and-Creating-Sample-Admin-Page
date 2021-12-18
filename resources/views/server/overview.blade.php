@@ -9,8 +9,14 @@
 @section('content')
 
 @if($system_resource)
+
+  @php
+  $chart = $system_resource->chart_data();
+  @endphp
+
   @livewire('server.statistics', ['system_resource' => $system_resource])
-  @livewire('server.stat.cpu')
+  @livewire('server.stat.cpu', ['chart' => $chart])
+
 @else
   @include('server.installation-guide')
 @endif
