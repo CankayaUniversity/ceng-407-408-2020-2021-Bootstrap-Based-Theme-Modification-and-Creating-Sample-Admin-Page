@@ -20,7 +20,6 @@ class SchedulerController extends Controller
             if(!$data) abort(403);
     
             $data = json_decode($data, true);
-            return $data;
 
             $sysres = new SystemResource();
             $sysres->server_id = $server->id;
@@ -35,18 +34,11 @@ class SchedulerController extends Controller
             $sysres->vmem_available = $data['memory']['virtual_memory']['available'];
             $sysres->vmem_used      = $data['memory']['virtual_memory']['used'];
             $sysres->vmem_free      = $data['memory']['virtual_memory']['free'];
-            $sysres->vmem_active    = $data['memory']['virtual_memory']['active'];
-            $sysres->vmem_inactive  = $data['memory']['virtual_memory']['inactive'];
-            $sysres->vmem_buffers   = $data['memory']['virtual_memory']['buffers'];
-            $sysres->vmem_cached    = $data['memory']['virtual_memory']['cached'];
-            $sysres->vmem_shared    = $data['memory']['virtual_memory']['shared'];
 
             $sysres->swap_mem       = $data['memory']['swap_memory']['percent'];
             $sysres->swap_mem_total = $data['memory']['swap_memory']['total'];
             $sysres->swap_mem_used  = $data['memory']['swap_memory']['used'];
             $sysres->swap_mem_free  = $data['memory']['swap_memory']['free'];
-            $sysres->swap_mem_sin   = $data['memory']['swap_memory']['sin'];
-            $sysres->swap_mem_sout  = $data['memory']['swap_memory']['sout'];
 
             $sysres->disk       = $data['disk']['usage']['percent'];
             $sysres->disk_total = $data['disk']['usage']['total'];
