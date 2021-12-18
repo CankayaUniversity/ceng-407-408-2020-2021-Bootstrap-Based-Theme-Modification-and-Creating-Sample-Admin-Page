@@ -29,19 +29,12 @@ MEMORY['virtual'] = {
     "percent": MEMORY['virtual_memory'].percent,
     "used": MEMORY['virtual_memory'].used,
     "free": MEMORY['virtual_memory'].free,
-    "active": MEMORY['virtual_memory'].active,
-    "inactive": MEMORY['virtual_memory'].inactive,
-    "buffers": MEMORY['virtual_memory'].buffers,
-    "cached": MEMORY['virtual_memory'].cached,
-    "shared": MEMORY['virtual_memory'].shared,
 }
 MEMORY['swap'] = {
     "total": MEMORY['swap_memory'].total,
     "used": MEMORY['swap_memory'].used,
     "free": MEMORY['swap_memory'].free,
     "percent": MEMORY['swap_memory'].percent,
-    "sin": MEMORY['swap_memory'].sin,
-    "sout": MEMORY['swap_memory'].sout,
 }
 
 # DISK
