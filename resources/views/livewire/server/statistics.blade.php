@@ -1,7 +1,7 @@
 <div>
     <div class="card card-statistics">
         <div class="card-header">
-            <h4 class="card-title">Statistics</h4>
+            <h4 class="card-title">System Resources</h4>
             <div class="d-flex align-items-center">
                 <p class="card-text me-25 mb-0">Updated 1 month ago</p>
             </div>

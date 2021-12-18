@@ -8,8 +8,12 @@
 
 @section('content')
 
-@livewire('server.statistics', ['system_resource' => $system_resource])
-@livewire('server.stat.cpu')
+@if($system_resource)
+  @livewire('server.statistics', ['system_resource' => $system_resource])
+  @livewire('server.stat.cpu')
+@else
+  @include('server.installation-guide')
+@endif
 
 @endsection
 

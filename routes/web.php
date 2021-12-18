@@ -23,7 +23,10 @@ use Illuminate\Support\Facades\Auth;
 Route::group( ['middleware' => 'auth' ], function(){
     Route::get('/', [DashboardController::class, 'home'])->name('home');
     Route::get('home', [DashboardController::class, 'home'])->name('home');
+
+    Route::get('server/add', [ServerController::class, 'add'])->name('server-add');
     Route::get('server/{id}', [ServerController::class, 'overview'])->name('server-overview');
+    
     Route::get('user/list', [UserController::class, 'list'])->name('user-list');
 });
 

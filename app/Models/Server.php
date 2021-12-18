@@ -9,6 +9,13 @@ class Server extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+        'key',
+        'last_update'
+    ];
+
     public function system_resources() {
         return $this->hasMany(SystemResource::class);
     }

@@ -44,4 +44,5 @@ class SystemResource extends Model
     public function server(){
         return $this->belongsTo(Server::class, 'server_id', 'id');
     }
+
 }
