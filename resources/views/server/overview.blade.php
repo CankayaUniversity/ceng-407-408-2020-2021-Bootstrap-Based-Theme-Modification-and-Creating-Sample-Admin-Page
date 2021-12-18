@@ -11,13 +11,18 @@
 @if($system_resource)
 
   @php
-  $chart = $system_resource->chart_data();
+  $chart      = $system_resource->chart_data();
+  $chart_cpu  = \App\Models\SystemResource::parse_chart_data($chart, 'cpu');
+  $chart_vmem = \App\Models\SystemResource::parse_chart_data($chart, 'vmem');
   @endphp
 
   @livewire('server.statistics', ['system_resource' => $system_resource])
   <div class="row">
     <div class="col-lg-6">
-      @livewire('server.stat.cpu', ['chart' => $chart])
+      @livewire('server.stat.cpu')
+    </div>
+    <div class="col-lg-6">
+      @livewire('server.stat.vmem')
     </div>
   </div>
 
@@ -27,7 +32,150 @@
 
 @endsection
 
+
+@section('vendor-script')
+  <!-- vendor files -->
+  <script src="{{ asset(mix('vendors/js/charts/apexcharts.min.js')) }}"></script>
+@endsection
+
+
 @section('page-script')
-  <!-- Page js files -->
-  <script src="{{ asset(mix('js/scripts/charts/chart-apex.js')) }}"></script>
+
+<!-- Page js files -->
+<script src="{{ asset(mix('js/scripts/charts/chart-apex.js')) }}"></script>
+
+  <script>
+    // Line Chart
+    // --------------------------------------------------------------------
+    var lineChartEl = document.querySelector('#cpu-chart'),
+      lineChartConfig = {
+        chart: {
+          height: 300,
+          type: 'line',
+          zoom: {
+            enabled: false
+          },
+          parentHeightOffset: 0,
+          toolbar: {
+            show: false
+          }
+        },
+        series: [
+          {
+            data: {{ json_encode( $chart_cpu['data'] ) }}
+          }
+        ],
+        markers: {
+          strokeWidth: 7,
+          strokeOpacity: 1,
+          strokeColors: [window.colors.solid.white],
+          colors: [window.colors.solid.warning]
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight',
+          width: 3,
+        },
+        colors: [window.colors.solid.warning],
+        grid: {
+          xaxis: {
+            lines: {
+              show: true
+            }
+          },
+          padding: {
+            top: -20
+          }
+        },
+        tooltip: {
+          custom: function (data) {
+            return (
+              '<div class="px-1 py-50">' +
+              '<span>' +
+              data.series[data.seriesIndex][data.dataPointIndex] +
+              '%</span>' +
+              '</div>'
+            );
+          }
+        },
+        xaxis: {
+          categories: {!! json_encode( $chart_cpu['labels'] ) !!},
+        },
+        yaxis: {
+          opposite: false
+        }
+      };
+    if (typeof lineChartEl !== undefined && lineChartEl !== null) {
+      var lineChart = new ApexCharts(lineChartEl, lineChartConfig);
+      lineChart.render();
+    }
+  </script>
+  <script>
+    // Line Chart
+    // --------------------------------------------------------------------
+        var lineChartElVmem = document.querySelector('#vmem-chart'),
+        lineChartConfigVmem = {
+          chart: {
+            height: 300,
+            type: 'line',
+            zoom: {
+              enabled: false
+            },
+            parentHeightOffset: 0,
+            toolbar: {
+              show: false
+            }
+          },
+          series: [
+            {
+              data: {{ json_encode( $chart_vmem['data'] ) }}
+            }
+          ],
+          markers: {
+            strokeWidth: 7,
+            strokeOpacity: 1,
+            strokeColors: ['#fff'],
+            colors: ['#ffad5f']
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: 'straight',
+            width: 3,
+          },
+          colors: ['#ffad5f'],
+          grid: {
+            xaxis: {
+              lines: {
+                show: true
+              }
+            },
+            padding: {
+              top: -20
+            }
+          },
+          tooltip: {
+            custom: function (data) {
+              return (
+                '<div class="px-1 py-50">' +
+                '<span>' +
+                data.series[data.seriesIndex][data.dataPointIndex] +
+                '%</span>' +
+                '</div>'
+              );
+            }
+          },
+          xaxis: {
+            categories: {!! json_encode( $chart_vmem['labels'] ) !!},
+          },
+          yaxis: {
+            opposite: false
+          }
+        };
+        var lineChartVmem = new ApexCharts(lineChartElVmem, lineChartConfigVmem);
+        lineChartVmem.render();
+  </script>
 @endsection

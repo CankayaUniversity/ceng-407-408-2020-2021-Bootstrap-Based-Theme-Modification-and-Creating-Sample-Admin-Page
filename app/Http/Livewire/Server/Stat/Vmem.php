@@ -5,12 +5,12 @@ namespace App\Http\Livewire\Server\Stat;
 use App\Models\SystemResource;
 use Livewire\Component;
 
-class Cpu extends Component
+class Vmem extends Component
 {
     public $chart;
 
     public function render()
     {
-        return view('livewire.server.stat.cpu');
+        return view('livewire.server.stat.vmem');
     }
 }

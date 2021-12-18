@@ -1,4 +1,4 @@
-<div>
+<div wire:key="vmem-chart">
     <!-- Line Chart Starts -->
     <div class="col-12">
       <div class="card">
@@ -13,13 +13,17 @@
           "
         >
           <div>
-            <h4 class="card-title mb-25">CPU</h4>
+            <h4 class="card-title mb-25">Virtual Memory</h4>
           </div>
         </div>
         <div class="card-body">
-          <div id="cpu-chart"></div>
+          <div id="vmem-chart"></div>
         </div>
       </div>
     </div>
     <!-- Line Chart Ends -->
 </div>
+
+@push('scripts')
+  
+@endpush
