@@ -1,6 +1,7 @@
 import psutil
 import pprint
 import json
+import requests
 
 SERVER_KEY = ""
 
@@ -66,3 +67,6 @@ REPORT['sensors'] = SENSORS
 output = json.dumps(REPORT)
 print(output)
 # pprint.pprint(REPORT)
+
+# Send Data
+requests.post('https://srmav.aydemir.im/scheduler/data/save/SERVER', json=REPORT)

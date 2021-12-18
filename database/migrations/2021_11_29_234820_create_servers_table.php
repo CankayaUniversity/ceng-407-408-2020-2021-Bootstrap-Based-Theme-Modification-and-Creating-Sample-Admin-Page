@@ -18,6 +18,7 @@ class CreateServersTable extends Migration
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->uuid('key');
             $table->string('name');
             $table->timestamp('last_update');
         });

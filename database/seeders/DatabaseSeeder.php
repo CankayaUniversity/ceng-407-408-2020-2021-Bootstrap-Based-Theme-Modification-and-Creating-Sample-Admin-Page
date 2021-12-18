@@ -7,6 +7,7 @@ use App\Models\SystemResource;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,18 +27,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Server::create([
+            'key'         => Str::uuid()->toString(),
             'user_id'     => 1,
             'name'        => 'Mail Server',
             'last_update' => now()
         ]);
 
         Server::create([
+            'key'         => Str::uuid()->toString(),
             'user_id'     => 1,
             'name'        => 'Database Servers',
             'last_update' => now()
         ]);
 
         Server::create([
+            'key'         => Str::uuid()->toString(),
             'user_id'     => 1,
             'name'        => 'Queue Servers',
             'last_update' => now()
