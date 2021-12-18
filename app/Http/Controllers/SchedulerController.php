@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Server;
 use App\Models\SystemResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Throwable;
 
 class SchedulerController extends Controller
@@ -60,5 +61,18 @@ class SchedulerController extends Controller
             echo $e->getMessage();
             // dd($e);
         }
+    }
+
+    public function download ($key) {
+
+        $agent_content = File::get( base_path() . '/agent/agent.py' );
+        $agent_content = str_replace("\n# SERVER_KEY = \"\" \n\n", "\nSERVER_KEY = \"" . $key . "\" \n\n", $agent_content);
+
+        $filename = "srmav-agent.py";
+
+        return response()->streamDownload(function () use ($agent_content) {
+            echo $agent_content;
+        }, $filename);
+        
     }
 }

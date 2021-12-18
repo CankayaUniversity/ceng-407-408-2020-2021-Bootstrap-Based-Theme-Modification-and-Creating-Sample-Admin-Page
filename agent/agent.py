@@ -3,7 +3,7 @@ import pprint
 import json
 import requests
 
-SERVER_KEY = ""
+# SERVER_KEY = "" 
 
 # SYSTEM
 SYSTEM = {}
@@ -23,37 +23,11 @@ LOAD['avg'] = psutil.getloadavg()
 MEMORY = {}
 MEMORY['virtual_memory'] = psutil.virtual_memory()
 MEMORY['swap_memory'] = psutil.swap_memory()
-MEMORY['virtual'] = {
-    "total": MEMORY['virtual_memory'].total,
-    "available": MEMORY['virtual_memory'].available,
-    "percent": MEMORY['virtual_memory'].percent,
-    "used": MEMORY['virtual_memory'].used,
-    "free": MEMORY['virtual_memory'].free,
-    "active": MEMORY['virtual_memory'].active,
-    "inactive": MEMORY['virtual_memory'].inactive,
-    "buffers": MEMORY['virtual_memory'].buffers,
-    "cached": MEMORY['virtual_memory'].cached,
-    "shared": MEMORY['virtual_memory'].shared,
-}
-MEMORY['swap'] = {
-    "total": MEMORY['swap_memory'].total,
-    "used": MEMORY['swap_memory'].used,
-    "free": MEMORY['swap_memory'].free,
-    "percent": MEMORY['swap_memory'].percent,
-    "sin": MEMORY['swap_memory'].sin,
-    "sout": MEMORY['swap_memory'].sout,
-}
 
 # DISK
 DISK = {}
 DISK['partitions'] = psutil.disk_partitions()
 DISK['usage'] = psutil.disk_usage('/')
-
-# SENSORS
-SENSORS = {}
-SENSORS['temperatures'] = psutil.sensors_temperatures()
-SENSORS['fans'] = psutil.sensors_fans()
-SENSORS['battery'] = psutil.sensors_fans()
 
 # REPORT
 REPORT            = {}
@@ -62,13 +36,11 @@ REPORT['cpu']     = CPU
 REPORT['load']    = LOAD
 REPORT['memory']  = MEMORY
 REPORT['disk']    = DISK
-REPORT['sensors'] = SENSORS
 
 output = json.dumps(REPORT)
 # print(output)
 # pprint.pprint(REPORT)
 
 # Send Data
-res = requests.post('https://srmav.aydemir.im/api/scheduler/data/save/d984c9cd-9938-43f1-843f-89755d89e56c', json=REPORT)
-
+res = requests.post("https://srmav.aydemir.im/api/scheduler/data/save/{}".format(SERVER_KEY), json=REPORT)
 print(res.text)
