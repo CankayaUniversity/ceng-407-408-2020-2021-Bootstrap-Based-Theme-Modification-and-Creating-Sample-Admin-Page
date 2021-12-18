@@ -16,8 +16,8 @@
         @endphp
         <tr>
             <td><a href="{{ route('server-overview', $server->id) }}">{{ $server['name'] }}</a></td>
-            <td><strong>{{ $last->cpu }}%</strong></td>
-            <td><strong>{{ $last->memory }}%</strong></td>
+            <td><strong>{{ $last->load_avg }}%</strong></td>
+            <td><strong>{{ $last->vmem }}%</strong></td>
             <td><strong>{{ $last->disk }}%</strong></td>
         </tr>
         @endforeach

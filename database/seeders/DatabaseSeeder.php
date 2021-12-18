@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Server::create([
-            'key'         => Str::uuid()->toString(),
+            'key'         => 'd984c9cd-9938-43f1-843f-89755d89e56c',
             'user_id'     => 1,
             'name'        => 'Default Server',
             'last_update' => now()

@@ -69,6 +69,6 @@ output = json.dumps(REPORT)
 # pprint.pprint(REPORT)
 
 # Send Data
-res = requests.post('https://srmav.aydemir.im/api/scheduler/data/save/5c685e55-d6d3-47de-9cdc-dc23d932f338', json=REPORT)
+res = requests.post('https://srmav.aydemir.im/api/scheduler/data/save/d984c9cd-9938-43f1-843f-89755d89e56c', json=REPORT)
 
 print(res.text)

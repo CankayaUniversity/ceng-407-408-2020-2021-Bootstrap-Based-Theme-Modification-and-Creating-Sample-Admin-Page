@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/scheduler/data/save/{key}', [App\Http\Controllers\SchedulerController::class, 'save'])->name('scheduler.data.save');
+Route::get('/scheduler/data/save/{key}', [App\Http\Controllers\SchedulerController::class, 'save'])->name('scheduler.data.save');

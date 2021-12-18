@@ -17,34 +17,35 @@ class CreateSystemResourcesTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('server_id')->constrained()->onDelete('cascade');
+            $table->foreignId('server_id')->nullable()->constrained()->onDelete('cascade');
 
-            $table->float('cpu_percent');
-            $table->integer('cpu_count');
+            $table->float('cpu')->nullable();
+            $table->integer('cpu_count')->nullable();
 
-            $table->float('load_avg');
+            $table->float('load_avg')->nullable();
 
-            $table->bigInteger('vmem_total');
-            $table->bigInteger('vmem_available');
-            $table->float('vmem_percent');
-            $table->bigInteger('vmem_used');
-            $table->bigInteger('vmem_free');
-            $table->bigInteger('vmem_inactive');
-            $table->bigInteger('vmem_buffers');
-            $table->bigInteger('vmem_cached');
-            $table->bigInteger('vmem_shared');
+            $table->float('vmem')->nullable();
+            $table->bigInteger('vmem_total')->nullable();
+            $table->bigInteger('vmem_available')->nullable();
+            $table->bigInteger('vmem_used')->nullable();
+            $table->bigInteger('vmem_free')->nullable();
+            $table->bigInteger('vmem_active')->nullable();
+            $table->bigInteger('vmem_inactive')->nullable();
+            $table->bigInteger('vmem_buffers')->nullable();
+            $table->bigInteger('vmem_cached')->nullable();
+            $table->bigInteger('vmem_shared')->nullable();
 
-            $table->bigInteger('swap_mem_total');
-            $table->bigInteger('swap_mem_used');
-            $table->bigInteger('swap_mem_free');
-            $table->float('swap_mem_percent');
-            $table->bigInteger('swap_mem_sin');
-            $table->bigInteger('swap_mem_sout');
+            $table->float('swap_mem')->nullable();
+            $table->bigInteger('swap_mem_total')->nullable();
+            $table->bigInteger('swap_mem_used')->nullable();
+            $table->bigInteger('swap_mem_free')->nullable();
+            $table->bigInteger('swap_mem_sin')->nullable();
+            $table->bigInteger('swap_mem_sout')->nullable();
 
-            $table->bigInteger('disk_total');
-            $table->bigInteger('disk_used');
-            $table->bigInteger('disk_free');
-            $table->float('disk_percent');
+            $table->float('disk')->nullable();
+            $table->bigInteger('disk_total')->nullable();
+            $table->bigInteger('disk_used')->nullable();
+            $table->bigInteger('disk_free')->nullable();
         });
     }
 
