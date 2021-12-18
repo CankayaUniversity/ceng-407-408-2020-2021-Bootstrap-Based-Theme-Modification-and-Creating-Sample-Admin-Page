@@ -65,8 +65,10 @@ REPORT['disk']    = DISK
 REPORT['sensors'] = SENSORS
 
 output = json.dumps(REPORT)
-print(output)
+# print(output)
 # pprint.pprint(REPORT)
 
 # Send Data
-requests.post('https://srmav.aydemir.im/scheduler/data/save/SERVER', json=REPORT)
+res = requests.post('https://srmav.aydemir.im/api/scheduler/data/save/5c685e55-d6d3-47de-9cdc-dc23d932f338', json=REPORT)
+
+print(res.text)
