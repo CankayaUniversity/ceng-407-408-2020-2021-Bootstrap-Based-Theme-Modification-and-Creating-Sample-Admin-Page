@@ -36,7 +36,7 @@
     var lineChartEl = document.querySelector('#cpu-chart'),
       lineChartConfig = {
         chart: {
-          height: 400,
+          height: 300,
           type: 'line',
           zoom: {
             enabled: false
@@ -61,7 +61,8 @@
           enabled: false
         },
         stroke: {
-          curve: 'straight'
+          curve: 'straight',
+          width: 3,
         },
         colors: [window.colors.solid.warning],
         grid: {
@@ -86,8 +87,7 @@
           }
         },
         xaxis: {
-          categories: {!! json_encode( $this->chart_data['labels'] ) !!}
-          
+          categories: {!! json_encode( $this->chart_data['labels'] ) !!},
         },
         yaxis: {
           opposite: false

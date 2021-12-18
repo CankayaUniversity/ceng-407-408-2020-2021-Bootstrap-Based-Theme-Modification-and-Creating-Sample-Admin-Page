@@ -15,7 +15,11 @@
   @endphp
 
   @livewire('server.statistics', ['system_resource' => $system_resource])
-  @livewire('server.stat.cpu', ['chart' => $chart])
+  <div class="row">
+    <div class="col-lg-6">
+      @livewire('server.stat.cpu', ['chart' => $chart])
+    </div>
+  </div>
 
 @else
   @include('server.installation-guide')
