@@ -30,7 +30,7 @@
             <th>Name</th>
             <th>Role</th>
             <th>Email</th>
-            <th>Last Activity</th>
+            <th>Servers</th>
             <th></th>
           </tr>
         </thead>
@@ -41,7 +41,7 @@
             <td>{{ $user->name }}</td>
             <td class="text-capitalize" style="{{ $user->role == 'admin' ? 'color:#ea5455' : null }}">{{ $user->role }}</td>
             <td>{{ $user->email }}</td>
-            <td></td>
+            <td>{{ $user->server_count() }}</td>
             <td>
               <a href="/user/make-admin/{{ $user->id }}" class="btn btn-sm btn-{{ $user->role == 'admin' ? 'warning' : 'primary' }} {{ auth()->user()->id == $user->id ? 'hidden' : null }}" {{ auth()->user()->id == $user->id ? 'disabled' : null }}>Make {{ $user->role == 'admin' ? 'User' : 'Admin' }}</a>
               <a href="/user/delete/{{ $user->id }}" class="btn btn-sm btn-danger {{ auth()->user()->id == $user->id ? 'disabled' : null }}" {{ auth()->user()->id == $user->id ? 'disabled' : null }}>Delete</a>

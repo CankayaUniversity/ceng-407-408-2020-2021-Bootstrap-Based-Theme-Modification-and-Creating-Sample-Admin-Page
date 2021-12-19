@@ -40,4 +40,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function server_count()
+    {
+        return Server::where('user_id', $this->id)->count();
+    }
 }
