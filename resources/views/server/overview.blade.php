@@ -34,6 +34,30 @@
     </div>
   </div>
 
+  @if($process)
+  <h4>Running Tasks</h4>
+  <div class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>PID</th>
+          <th>Name</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($process as &$p)
+        <tr>
+          <td>{{ $p->pid }}</td>
+          <td><strong>{{ $p->name }}</strong></td>
+          <td>{{ $p->username }}</td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+  @endif
+
 @else
   @include('server.installation-guide')
 @endif

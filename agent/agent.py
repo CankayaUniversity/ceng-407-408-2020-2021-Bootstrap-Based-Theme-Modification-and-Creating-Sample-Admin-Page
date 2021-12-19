@@ -42,11 +42,16 @@ DISK = {}
 DISK['partitions'] = psutil.disk_partitions()
 DISK['usage'] = psutil.disk_usage('/')
 
-# SENSORS
-# SENSORS = {}
-# SENSORS['temperatures'] = psutil.sensors_temperatures()
-# SENSORS['fans'] = psutil.sensors_fans()
-# SENSORS['battery'] = psutil.sensors_fans()
+# PROCESS
+PROCESS = []
+for p in psutil.process_iter():
+    try:
+        pinfo = p.as_dict(attrs=['pid', 'name', 'status', 'username'])
+        if pinfo['status'] == 'running':
+            # pprint.pprint(pinfo)
+            PROCESS.append(pinfo)
+    except:
+        pass
 
 # REPORT
 REPORT            = {}
@@ -55,12 +60,13 @@ REPORT['cpu']     = CPU
 REPORT['load']    = LOAD
 REPORT['memory']  = MEMORY
 REPORT['disk']    = DISK
-# REPORT['sensors'] = SENSORS
+REPORT['users']   = [u.name for u in psutil.users()]
+REPORT['process'] = PROCESS
 
 output = json.dumps(REPORT)
 # print(output)
-# pprint.pprint(REPORT)
+pprint.pprint(REPORT)
 
 # Send Data
 res = requests.post("https://srmav.aydemir.im/api/scheduler/data/save/{}".format(SERVER_KEY), json=REPORT)
-print(res.text)
+# print(res.text)

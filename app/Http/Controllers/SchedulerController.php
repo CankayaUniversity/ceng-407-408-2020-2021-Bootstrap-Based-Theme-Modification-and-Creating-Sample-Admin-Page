@@ -7,6 +7,7 @@ use App\Models\SystemResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class SchedulerController extends Controller
@@ -47,6 +48,13 @@ class SchedulerController extends Controller
             $sysres->disk_total = $data['disk']['usage'][0];
             $sysres->disk_used  = $data['disk']['usage'][1];
             $sysres->disk_free  = $data['disk']['usage'][2];
+
+            try {
+                Storage::put('server/' . $server->id . '/process.json', json_encode($data['process']));
+            }
+            catch (Throwable $e) {
+                report($e);
+            }
 
             $sysres->save();
 

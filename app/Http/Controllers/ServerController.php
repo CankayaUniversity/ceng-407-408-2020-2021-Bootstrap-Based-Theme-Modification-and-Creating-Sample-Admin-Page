@@ -6,6 +6,8 @@ use App\Models\Server;
 use App\Models\SystemResource;
 use GuzzleHttp\Psr7\ServerRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class ServerController extends Controller
 {
@@ -21,10 +23,20 @@ class ServerController extends Controller
             ['name' => $server->name],
         ];
 
+        try {
+            $process = Storage::get('server/' . $server->id . '/process.json');
+            $process = json_decode($process);
+        }
+        catch(Throwable $e){
+            report($e);
+            $process = false;
+        }
+
         return view('/server/overview', [
             'breadcrumbs'     => $breadcrumbs,
             'server'          => $server,
             'system_resource' => $sysres,
+            'process'         => $process
         ]);
     }
 
