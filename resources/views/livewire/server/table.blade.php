@@ -9,6 +9,7 @@
                 <th>CPU</th>
                 <th>Memory</th>
                 <th>Disk</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -16,11 +17,14 @@
             @php
             $last = $server->last_system_resources();
             @endphp
-            <tr>
+            <tr wire:key="{{$server}}">
                 <td><a href="{{ route('server-overview', $server->id) }}">{{ $server['name'] }}</a></td>
                 <td><strong>@if(isset($last->cpu)) {{ $last->cpu }}% @endif</strong></td>
                 <td><strong>@if(isset($last->vmem)) {{ $last->vmem }}% @endif</strong></td>
                 <td><strong>@if(isset($last->disk)) {{ $last->disk }}% @endif</strong></td>
+                <td>
+                    <button type="button" wire:click="delete({{$server->id}})" class="btn btn-sm btn-danger">Delete</button>
+                </td>
             </tr>
             @endforeach
             </tbody>

@@ -15,4 +15,12 @@ class Table extends Component
             'servers' => $servers
         ]);
     }
+
+    public function delete($server_id)
+    {
+        $server = Server::find($server_id);
+        if($server) {
+            $server->delete();
+        }
+    }
 }
