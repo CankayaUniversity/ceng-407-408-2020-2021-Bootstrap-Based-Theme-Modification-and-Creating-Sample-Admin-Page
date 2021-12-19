@@ -2,24 +2,15 @@
   "menu": [
     {
       "url": "home",
-      "name": "Home",
-      "icon": "home",
-      "slug": "home"
+      "name": "Servers",
+      "icon": "server",
+      "slug": "server"
     },
     {
+      "url": "user/list",
       "name": "Users",
       "icon": "user",
-      "slug": "users",
-      "badge": "",
-      "badgeClass": "badge rounded-pill badge-light-danger ms-auto me-1",
-      "submenu": [
-        {
-          "url": "user/list",
-          "name": "List",
-          "icon": "list",
-          "slug": "collapsed-menu"
-        }
-      ]
+      "slug": "users"
     }
   ]
 }

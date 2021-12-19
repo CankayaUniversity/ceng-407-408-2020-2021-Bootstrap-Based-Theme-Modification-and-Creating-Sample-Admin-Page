@@ -6,6 +6,7 @@ use App\Models\Server;
 use App\Models\SystemResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class SchedulerController extends Controller
@@ -29,21 +30,23 @@ class SchedulerController extends Controller
 
             $sysres->load_avg = array_sum($data['load']['avg']) / count($data['load']['avg']);;
 
-            $sysres->vmem           = $data['memory']['virtual_memory']['percent'];
-            $sysres->vmem_total     = $data['memory']['virtual_memory']['total'];
-            $sysres->vmem_available = $data['memory']['virtual_memory']['available'];
-            $sysres->vmem_used      = $data['memory']['virtual_memory']['used'];
-            $sysres->vmem_free      = $data['memory']['virtual_memory']['free'];
+            Log::debug($data);
 
-            $sysres->swap_mem       = $data['memory']['swap_memory']['percent'];
-            $sysres->swap_mem_total = $data['memory']['swap_memory']['total'];
-            $sysres->swap_mem_used  = $data['memory']['swap_memory']['used'];
-            $sysres->swap_mem_free  = $data['memory']['swap_memory']['free'];
+            $sysres->vmem           = $data['memory']['virtual']['percent'];
+            $sysres->vmem_total     = $data['memory']['virtual']['total'];
+            $sysres->vmem_available = $data['memory']['virtual']['available'];
+            $sysres->vmem_used      = $data['memory']['virtual']['used'];
+            $sysres->vmem_free      = $data['memory']['virtual']['free'];
 
-            $sysres->disk       = $data['disk']['usage']['percent'];
-            $sysres->disk_total = $data['disk']['usage']['total'];
-            $sysres->disk_used  = $data['disk']['usage']['used'];
-            $sysres->disk_free  = $data['disk']['usage']['free'];
+            $sysres->swap_mem       = $data['memory']['swap']['percent'];
+            $sysres->swap_mem_total = $data['memory']['swap']['total'];
+            $sysres->swap_mem_used  = $data['memory']['swap']['used'];
+            $sysres->swap_mem_free  = $data['memory']['swap']['free'];
+
+            $sysres->disk       = $data['disk']['usage'][3];
+            $sysres->disk_total = $data['disk']['usage'][0];
+            $sysres->disk_used  = $data['disk']['usage'][1];
+            $sysres->disk_free  = $data['disk']['usage'][2];
 
             $sysres->save();
 

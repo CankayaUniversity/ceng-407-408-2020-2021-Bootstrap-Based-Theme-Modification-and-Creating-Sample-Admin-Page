@@ -46,7 +46,7 @@ class SystemResource extends Model
         return $this->belongsTo(Server::class, 'server_id', 'id');
     }
 
-    public function chart_data ($limit = 60) {
+    public function chart_data ($limit = 500) {
         $cache_key = 'sysres.chart-data.' . $this->server->id . $limit;
         return Cache::remember($cache_key, now()->addMinutes(1), function() use (&$limit){
             return SystemResource::where('server_id', $this->server->id)->limit($limit)->get();
