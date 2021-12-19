@@ -12,19 +12,55 @@
 
   @php
   $chart      = $system_resource->chart_data();
-  $chart_load = \App\Models\SystemResource::parse_chart_data($chart, 'load_avg');
+  $chart_boot = \App\Models\SystemResource::parse_chart_data($chart, 'boot_time');
   $chart_cpu  = \App\Models\SystemResource::parse_chart_data($chart, 'cpu');
   $chart_vmem = \App\Models\SystemResource::parse_chart_data($chart, 'vmem');
   $chart_swap = \App\Models\SystemResource::parse_chart_data($chart, 'swap_mem');
   @endphp
 
   @livewire('server.statistics', ['system_resource' => $system_resource])
-  <div class="row">
-    <div class="col-lg-6">
-      @livewire('server.stat.load')
-    </div>
+  <div class="row row-eq-height">
+    
     <div class="col-lg-6">
       @livewire('server.stat.cpu')
+    </div>
+    <div class="col-lg-6">
+      <div class="card" style="height:179px; overflow: auto">
+        <div class="p-1 pb-0"><h4>Users</h4></div>
+        <ul class="list-group list-group-flush">
+          @foreach($users as &$user)
+          <li class="list-group-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            {{ $user }}
+          </li>
+          @endforeach
+        </ul>
+      </div>
+      <div class="card" style="height:179px; overflow: auto">
+        <div class="p-1 pb-0"><h4>Disk Partitions</h4></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Device</th>
+              <th>FileSystem</th>
+              <th>Opts</th>
+              <th>Maxfile</th>
+              <th>Maxpath</th>
+            </tr>
+          </thead>
+          @foreach($disk->partitions as &$disk)
+          <tbody>
+            <tr>
+              <td><strong>{{ $disk[0] }}</strong></td>
+              <td>{{ $disk[2] }}</td>
+              <td>{{ $disk[3] }}</td>
+              <td>{{ $disk[4] }}</td>
+              <td>{{ $disk[5] }}</td>
+            </tr>
+          </tbody>
+          @endforeach
+          </table>
+      </div>
     </div>
     <div class="col-lg-6">
       @livewire('server.stat.vmem')
@@ -164,7 +200,7 @@
         },
         series: [
           {
-            data: {{ json_encode( $chart_load['data'] ) }}
+            data: {{ json_encode( $chart_boot['data'] ) }}
           }
         ],
         markers: {
@@ -203,7 +239,7 @@
           }
         },
         xaxis: {
-          categories: {!! json_encode( $chart_load['labels'] ) !!},
+          categories: {!! json_encode( $chart_boot['labels'] ) !!},
         },
         yaxis: {
           opposite: false

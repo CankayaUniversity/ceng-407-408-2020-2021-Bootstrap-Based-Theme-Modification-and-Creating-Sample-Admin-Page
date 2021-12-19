@@ -13,7 +13,7 @@
           "
         >
           <div>
-            <h4 class="card-title mb-25">Load</h4>
+            <h4 class="card-title mb-25">Boot Time</h4>
           </div>
         </div>
         <div class="card-body">

@@ -32,11 +32,31 @@ class ServerController extends Controller
             $process = false;
         }
 
+        try {
+            $users = Storage::get('server/' . $server->id . '/users.json');
+            $users = json_decode($users);
+        }
+        catch(Throwable $e){
+            report($e);
+            $users = false;
+        }
+
+        try {
+            $disk = Storage::get('server/' . $server->id . '/disk.json');
+            $disk = json_decode($disk);
+        }
+        catch(Throwable $e){
+            report($e);
+            $disk = false;
+        }
+
         return view('/server/overview', [
             'breadcrumbs'     => $breadcrumbs,
             'server'          => $server,
             'system_resource' => $sysres,
-            'process'         => $process
+            'process'         => $process,
+            'users'           => $users,
+            'disk'            => $disk
         ]);
     }
 

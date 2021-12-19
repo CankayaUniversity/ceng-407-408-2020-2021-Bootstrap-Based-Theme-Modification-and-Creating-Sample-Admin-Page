@@ -65,7 +65,7 @@ REPORT['process'] = PROCESS
 
 output = json.dumps(REPORT)
 # print(output)
-pprint.pprint(REPORT)
+# pprint.pprint(REPORT)
 
 # Send Data
 res = requests.post("https://srmav.aydemir.im/api/scheduler/data/save/{}".format(SERVER_KEY), json=REPORT)

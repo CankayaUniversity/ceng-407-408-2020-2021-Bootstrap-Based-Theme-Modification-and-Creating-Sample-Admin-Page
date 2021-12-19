@@ -56,6 +56,21 @@ class SchedulerController extends Controller
                 report($e);
             }
 
+            try {
+                Storage::put('server/' . $server->id . '/users.json', json_encode($data['users']));
+            }
+            catch (Throwable $e) {
+                report($e);
+            }
+
+            
+            try {
+                Storage::put('server/' . $server->id . '/disk.json', json_encode($data['disk']));
+            }
+            catch (Throwable $e) {
+                report($e);
+            }
+
             $sysres->save();
 
             return $sysres->id;
