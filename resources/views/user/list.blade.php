@@ -20,6 +20,10 @@
 <!-- users list start -->
 <section class="app-user-list">
 
+@if(auth()->user()->role !== 'admin')
+<div class="alert alert-danger p-3">Only admins can see this page.</div>
+@else
+
   <!-- list and filter start -->
   <div class="card">
     <div class="card-datatable table-responsive pt-0">
@@ -52,6 +56,7 @@
       </table>
     </div>
   </div>
+  @endif
   <!-- list and filter end -->
 </section>
 <!-- users list ends -->
