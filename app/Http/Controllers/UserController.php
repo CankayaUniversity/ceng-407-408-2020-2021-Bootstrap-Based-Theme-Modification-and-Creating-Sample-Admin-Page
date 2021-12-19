@@ -31,4 +31,18 @@ class UserController extends Controller
         $user->delete();
         return redirect('/user/list');
     }
+
+    public function make_admin($id)
+    {
+        $user = User::find($id);
+        if(!$user) abort(403);
+
+        if($user->id == Auth::user()->id) abort(403);
+        if(Auth::user()->role !== 'admin') abort(403);
+
+        $user->role = $user->role == 'admin' ? 'user' : 'admin';
+        $user->save();
+
+        return redirect('/user/list');
+    }
 }
