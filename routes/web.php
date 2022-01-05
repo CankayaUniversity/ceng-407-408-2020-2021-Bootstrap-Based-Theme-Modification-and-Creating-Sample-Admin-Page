@@ -28,6 +28,7 @@ Route::group( ['middleware' => 'auth' ], function(){
     Route::get('server/{id}', [ServerController::class, 'overview'])->name('server-overview');
     
     Route::get('user/list', [UserController::class, 'list'])->name('user-list');
+    Route::get('user/settings', [UserController::class, 'settings'])->name('user-settings');
     Route::get('user/delete/{id}', [UserController::class, 'delete'])->name('user-delete');
     Route::get('user/make-admin/{id}', [UserController::class, 'make_admin'])->name('user-make-admin');
 });

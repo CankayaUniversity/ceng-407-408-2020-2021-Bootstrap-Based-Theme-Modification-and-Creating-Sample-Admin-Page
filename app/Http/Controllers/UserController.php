@@ -20,6 +20,15 @@ class UserController extends Controller
         ]);
     }
 
+    public function settings()
+    {
+        $pageConfigs = ['pageHeader' => false];
+
+        return view('user/settings', [
+            'pageConfigs' => $pageConfigs,
+        ]);
+    }
+
     public function delete($id)
     {
         $user = User::find($id);
