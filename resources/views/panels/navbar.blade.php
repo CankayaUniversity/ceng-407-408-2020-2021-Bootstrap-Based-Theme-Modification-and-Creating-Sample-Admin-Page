@@ -66,7 +66,7 @@
     <li class="nav-item dropdown dropdown-user">
       <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);"
         data-bs-toggle="dropdown" aria-haspopup="true">
-        <div class="user-nav d-sm-flex d-none">
+        <div class="user-nav d-sm-flex ">
           <span class="user-name fw-bolder">
             @if (Auth::check())
               {{ Auth::user()->name }}

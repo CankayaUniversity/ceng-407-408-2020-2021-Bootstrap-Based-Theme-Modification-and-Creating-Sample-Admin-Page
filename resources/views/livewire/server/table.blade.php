@@ -1,6 +1,6 @@
 <div class="position-relative">
     <a class="btn btn-primary position-absolute" style="top:-50px; right:0" href="/server/add" id="add-server-btn">Add Server</a>
-    <div class="card">
+    <div class="card table-responsive">
         @if($servers)
         <table class="table">
             <thead>
